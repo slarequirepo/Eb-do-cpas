@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exército Brasileiro - Roblox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background animado com Gojo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
+                url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1920&q=80') center/cover;
+            z-index: -2;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        /* Gojo Satoru Background */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: url('https://i.pinimg.com/originals/5d/11/83/5d1183b5e32ea641c9eb83e3f32aa8d3.gif') center/contain no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+            filter: hue-rotate(200deg) brightness(1.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -48%) scale(1.05); }
+        }
+
+        /* Partículas animadas */
+        .particle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: #00d4ff;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: particle-float 15s linear infinite;
+            box-shadow: 0 0 10px #00d4ff;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(10, 10, 20, 0.85);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 
+                0 0 60px rgba(0, 212, 255, 0.4),
+                0 20px 80px rgba(0, 0, 0, 0.8),
+                inset 0 0 100px rgba(0, 212, 255, 0.05);
+            animation: containerGlow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes containerGlow {
+            0%, 100% { box-shadow: 0 0 60px rgba(0, 212, 255, 0.4), 0 20px 80px rgba(0, 0, 0, 0.8); }
+            50% { box-shadow: 0 0 80px rgba(0, 212, 255, 0.6), 0 20px 100px rgba(0, 0, 0, 0.9); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 80px;
+            margin-bottom: 15px;
+            animation: logoSpin 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+        }
+
+        @keyframes logoSpin {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 
+                0 0 20px rgba(0, 212, 255, 0.8),
+                0 0 40px rgba(0, 212, 255, 0.6),
+                0 0 60px rgba(0, 212, 255, 0.4);
+            animation: textGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 212, 255, 0.6); }
+            50% { text-shadow: 0 0 30px rgba(0, 212, 255, 1), 0 0 60px rgba(0, 212, 255, 0.8); }
+        }
+
+        .subtitle {
+            color: #00d4ff;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .description {
+            color: #e0e0e0;
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(138, 43, 226, 0.1));
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .description strong {
+            color: #00d4ff;
+            font-size: 19px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .feature-tag {
+            background: rgba(138, 43, 226, 0.3);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+            border: 1px solid rgba(138, 43, 226, 0.5);
+            color: #fff;
+        }
+
+        .links-section {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .link-button {
+            display: block;
+            width: 100%;
+            padding: 20px 30px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #000;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 800;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 8px 25px rgba(0, 212, 255, 0.5),
+                0 0 40px rgba(0, 212, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .link-button:hover::before {
+            left: 100%;
+        }
+
+        .link-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 15px 40px rgba(0, 212, 255, 0.7),
+                0 0 60px rgba(0, 212, 255, 0.5);
+        }
+
+        .link-button:active {
+            transform: translateY(-2px) scale(1);
+        }
+
+        .discord-button {
+            background: linear-gradient(135deg, #5865F2 0%, #7289DA 100%);
+            box-shadow: 
+                0 8px 25px rgba(88, 101, 242, 0.5),
+                0 0 40px rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-button:hover {
+            box-shadow: 
+                0 15px 40px rgba(88, 101, 242, 0.7),
+                0 0 60px rgba(88, 101, 242, 0.5);
+        }
+
+        .roblox-button {
+            background: linear-gradient(135deg, #ff3366 0%, #cc0033 100%);
+            box-shadow: 
+                0 8px 25px rgba(255, 51, 102, 0.5),
+                0 0 40px rgba(255, 51, 102, 0.3);
+            font-size: 20px;
+            padding: 25px 30px;
+            animation: robloxPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes robloxPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .roblox-button:hover {
+            box-shadow: 
+                0 15px 40px rgba(255, 51, 102, 0.8),
+                0 0 80px rgba(255, 51, 102, 0.6);
+            animation: none;
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(0, 212, 255, 0.3);
+            color: #00d4ff;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .link-button {
+                padding: 18px 25px;
+                font-size: 16px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas animadas -->
+    <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+    <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+    <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+    <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+    <div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+    <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">⚔️🔥</div>
+            <h1>Exército Brasileiro</h1>
+            <div class="subtitle">🎌 Roblox Game 🎌</div>
+        </div>
+
+        <div class="description">
+            <strong>🔥 SOBRE O JOGO:</strong>
+            Entre no servidor mais ÉPICO de exército brasileiro no Roblox! Escolha sua gang, desenvolva poderes de anime insanos, domine técnicas de combate ninja e torne-se a lenda mais temida do servidor!
+            
+            <div class="features">
+                <div class="feature-tag">⚡ Poderes de Anime</div>
+                <div class="feature-tag">🎭 Sistema de Gangs</div>
+                <div class="feature-tag">⚔️ Combate PvP</div>
+                <div class="feature-tag">🏆 Ranking Global</div>
+                <div class="feature-tag">👤 Custom Characters</div>
+                <div class="feature-tag">🌌 Raças Épicas</div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(138, 43, 226, 0.2); border-radius: 10px; border: 1px solid rgba(138, 43, 226, 0.4);">
+                <strong style="color: #00d4ff; display: block; margin-bottom: 8px;">🌟 RAÇAS DISPONÍVEIS:</strong>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px;">
+                    <span style="background: rgba(255, 215, 0, 0.3); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 215, 0, 0.5);">🌌 Cosmic</span>
+                    <span style="background: rgba(255, 255, 255, 0.2); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.4);">👼 Anjo</span>
+                    <span style="background: rgba(138, 43, 226, 0.3); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(138, 43, 226, 0.5);">👹 Mahoraga</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="links-section">
+            <div class="section-title">
+                <span>💬</span> ENTRE NA COMUNIDADE
+            </div>
+            <a href="https://discord.gg/4GqDuCDkz" target="_blank" class="link-button discord-button">
+                <span class="icon">🎮</span> Discord Server 1 - Junte-se Agora!
+            </a>
+            <a href="https://discord.gg/fsXnxeVA4J" target="_blank" class="link-button discord-button">
+                <span class="icon">🎮</span> Discord Server 2 - Backup Server
+            </a>
+        </div>
+
+        <div class="links-section">
+            <div class="section-title">
+                <span>🚀</span> JOGAR AGORA
+            </div>
+            <a href="https://www.roblox.com/pt/games/121574223786126/Ex-rcito-Brasileiro" target="_blank" class="link-button roblox-button">
+                <span class="icon">⚔️</span> ENTRAR NO JOGO - CLIQUE AQUI!
+            </a>
+        </div>
+
+        <div class="footer">
+            ⭐ DOMINE O SERVIDOR E SE TORNE UMA LENDA! ⭐
+        </div>
+    </div>
+
+    <script>
+        // Efeito de cursor brilhante
+        document.addEventListener('mousemove', (e) => {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 5px;
+                height: 5px;
+                background: #00d4ff;
+                border-radius: 50%;
+                pointer-events: none;
+                left: ${e.clientX}px;
+                top: ${e.clientY}px;
+                opacity: 1;
+                box-shadow: 0 0 10px #00d4ff;
+                z-index: 9999;
+            `;
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.style.transition = 'all 0.5s ease';
+                particle.style.opacity = '0';
+                particle.style.transform = 'scale(2)';
+            }, 10);
+            
+            setTimeout(() => particle.remove(), 600);
+        });
+    </script>
+</body>
+  </html>
